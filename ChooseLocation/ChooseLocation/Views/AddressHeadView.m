@@ -9,11 +9,14 @@
 #import "AddressHeadView.h"
 
 #import "CollectionCell.h"
+
 static NSString *const kCollectionCellIdentifier = @"CollectionCell";
 
 @interface AddressHeadView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property(nonatomic, strong)UICollectionView *collectionView;
+
+@property(nonatomic, strong)UIView * underLine;
 
 @end
 
@@ -68,7 +71,9 @@ static NSString *const kCollectionCellIdentifier = @"CollectionCell";
         
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
-        _collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:layout];
+        CGFloat width = CGRectGetWidth(self.bounds);
+        
+        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, width, 30) collectionViewLayout:layout];
         [_collectionView setDelegate:self];
         [_collectionView setDataSource:self];
         [_collectionView setBackgroundColor:[UIColor whiteColor]];
@@ -76,6 +81,16 @@ static NSString *const kCollectionCellIdentifier = @"CollectionCell";
         [_collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([CollectionCell class]) bundle:nil] forCellWithReuseIdentifier:kCollectionCellIdentifier];
     }
     return _collectionView;
+}
+
+-(UIView *)underLine{
+    
+    if (_underLine == nil) {
+        _underLine = [[UIView alloc]initWithFrame:CGRectMake(0, 31, 17, 3)];
+        [_underLine setBackgroundColor:[UIColor redColor]];
+    }
+    return _underLine;
+
 }
 
 -(void)setDataArray:(NSArray *)dataArray{

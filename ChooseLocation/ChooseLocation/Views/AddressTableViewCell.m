@@ -33,6 +33,9 @@
 -(void)setItem:(AddressInfoModel *)item{
     _item = item;
     _addressLabel.text = item.cname;
+     NSLog(@"item.cname > %@",item.cname);
+    NSLog(@"item.isSelected > %d",item.isSelected);
+    
     _addressLabel.textColor = item.isSelected ? [UIColor orangeColor] : [UIColor blackColor] ;
     _selectFlag.hidden = !item.isSelected;
 }
