@@ -30,7 +30,9 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
 
 @property(nonatomic, assign)BOOL isWai;//是否选了国外
 
-@property(nonatomic, strong)NSArray *cityDataSouce;
+@property(nonatomic, strong)NSArray *cityDataSouce;//市数据
+
+@property(nonatomic, strong)NSArray *districtDataSouce;//区数据
 
 
 @end
@@ -179,6 +181,8 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
         return self.firstArray.count;
     }else if ([self.tableViews indexOfObject:tableView] == 1) {
         return self.cityDataSouce.count;
+    }else if ([self.tableViews indexOfObject:tableView] == 2) {
+        return self.districtDataSouce.count;
     }
     
     
@@ -195,6 +199,8 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
         item = self.firstArray[indexPath.row];
     }else if ([self.tableViews indexOfObject:tableView] == 1){
         item = self.cityDataSouce[indexPath.row];
+    }else if ([self.tableViews indexOfObject:tableView] == 2) {
+        item = self.districtDataSouce[indexPath.row];
     }
     cell.item = item;
     return cell;
@@ -253,17 +259,17 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
         if ([indexPath0 compare:indexPath] == NSOrderedSame && indexPath0){
             NSLog(@"[indexPath0 compare:indexPath] == NSOrderedSame");
         }
+        NSArray *districtArray = [provinceItem.childern lastObject];
         
-            
+        if (districtArray.count > 0) {
+            self.districtDataSouce = districtArray;
             [self updataHeadViewData:name loction:1];
             [self addItem:@"请选择"];
-            
             [self addTableView];
-            
             [self scrollToNextItem];
-            
-        
-        
+        }else{
+            [self removeFromSuperview];
+        }
     }
     return indexPath;
 }
@@ -273,9 +279,10 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
     AddressInfoModel * item;
      if([self.tableViews indexOfObject:tableView] == 0){
         item = self.firstArray[indexPath.row];
-    }
-    if([self.tableViews indexOfObject:tableView] == 1){
+    }else if([self.tableViews indexOfObject:tableView] == 1){
         item = self.cityDataSouce[indexPath.row];
+    }else if ([self.tableViews indexOfObject:tableView] == 2) {
+        item = self.districtDataSouce[indexPath.row];
     }
     item.isSelected = YES;
     
@@ -288,9 +295,10 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
     AddressInfoModel * item;
      if([self.tableViews indexOfObject:tableView] == 0){
            item = self.firstArray[indexPath.row];
-    }
-    if([self.tableViews indexOfObject:tableView] == 1){
+    }else if([self.tableViews indexOfObject:tableView] == 1){
         item = self.cityDataSouce[indexPath.row];
+    }else if ([self.tableViews indexOfObject:tableView] == 2) {
+        item = self.districtDataSouce[indexPath.row];
     }
     item.isSelected = NO;
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
