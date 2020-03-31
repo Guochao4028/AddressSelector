@@ -1,0 +1,16 @@
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '9.0'
+
+
+
+target 'ChooseLocation' do
+ 
+
+
+pod 'MJExtension'
+
+
+
+ 
+ 
+end
