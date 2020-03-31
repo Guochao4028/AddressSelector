@@ -270,6 +270,28 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
         }else{
             [self removeFromSuperview];
         }
+    }else if([self.tableViews indexOfObject:tableView] == 2){
+        //选择 区
+        //取得本层数据
+        AddressInfoModel * provinceItem = self.districtDataSouce[indexPath.row];
+        NSString *name = provinceItem.cname;
+        //1.1 判断是否是第一次选择,不是,则重新选择
+        NSIndexPath * indexPath0 = [tableView indexPathForSelectedRow];
+        
+        if ([indexPath0 compare:indexPath] == NSOrderedSame && indexPath0){
+            NSLog(@"[indexPath0 compare:indexPath] == NSOrderedSame");
+        }
+        NSArray *districtArray = [provinceItem.childern lastObject];
+        
+        if (districtArray.count > 0) {
+            self.districtDataSouce = districtArray;
+            [self updataHeadViewData:name loction:1];
+            [self addItem:@"请选择"];
+            [self addTableView];
+            [self scrollToNextItem];
+        }else{
+            [self removeFromSuperview];
+        }
     }
     return indexPath;
 }
