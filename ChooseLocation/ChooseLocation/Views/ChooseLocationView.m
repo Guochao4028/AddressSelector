@@ -300,10 +300,19 @@ static  CGFloat  const  kHYTopTabbarHeight = 34; //地址标签栏的高度
     
     AddressInfoModel * item;
      if([self.tableViews indexOfObject:tableView] == 0){
+         for (AddressInfoModel * model in self.firstArray) {
+             model.isSelected = NO;
+         }
         item = self.firstArray[indexPath.row];
     }else if([self.tableViews indexOfObject:tableView] == 1){
+        for (AddressInfoModel * model in self.cityDataSouce) {
+                    model.isSelected = NO;
+                }
         item = self.cityDataSouce[indexPath.row];
     }else if ([self.tableViews indexOfObject:tableView] == 2) {
+        for (AddressInfoModel * model in self.districtDataSouce) {
+            model.isSelected = NO;
+        }
         item = self.districtDataSouce[indexPath.row];
     }
     item.isSelected = YES;
