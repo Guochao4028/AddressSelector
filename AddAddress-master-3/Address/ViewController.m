@@ -27,7 +27,6 @@
 
 @property(nonatomic, strong)NSIndexPath *countriesIndexPath;
 @property(nonatomic, strong)NSIndexPath *provinceIndexPath;
-
 @property(nonatomic, strong)NSIndexPath *cityIndexPath;
 
 @end
